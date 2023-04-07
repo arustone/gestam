@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control de Ingreso y Salida de Empleados</title>
+  </head>
+  <body>
+    <form id="form">
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id"><br><br>
+      <label for="sitio">Sitio:</label>
+      <select id="sitio" name="sitio">
+        <option value="Oficina A">Oficina A</option>
+        <option value="Oficina B">Oficina B</option>
+        <option value="Oficina C">Oficina C</option>
+      </select><br><br>
+      <label for="accion">Acción:</label>
+      <select id="accion" name="accion">
+        <option value="Ingreso">Ingreso</option>
+        <option value="Salida">Salida</option>
+      </select><br><br>
+      <button type="submit" onclick="submitForm()">Enviar</button>
+    </form>
+
+    <script>
+      function submitForm() {
+        const id = document.getElementById('id').value;
+        const sitio = document.getElementById('sitio').value;
+        const accion = document.getElementById('accion').value;
+        const url = 'https://script.google.com/macros/s/AKfycbz_O0Rb56TFwgIsQArJz3Ohqfr9Xs0p0jESZYJdpBc/dev?id=' + id + '&sitio=' + sitio + '&accion=' + accion;
+        fetch(url)
+          .then(response => response.text())
+          .then(data => console.log(data))
+          .catch(error => console.log(error));
+        document.getElementById('form').reset();
+      }
+    </script>
+  </body>
+</html>
