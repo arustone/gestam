@@ -33,6 +33,19 @@
           .catch(error => console.log(error));
         document.getElementById('form').reset();
       }
-    </script>
+    <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzPbuxjH_QJomTjT-9Xg4_E4Cr_OvvfAQGdbZm4E_4/exec'
+  const form = document.forms['submit-to-google-sheet']
+  const successMessage = document.querySelector('.alert')
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+    successMessage.style.display = 'block'
+    form.reset()
+  })
+</script>
+
   </body>
 </html>
